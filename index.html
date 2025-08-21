@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitMint Store - Premium Fitness Apparel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== Base Styles ===== */
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #3e8e41;
+            --primary-light: #81C784;
+            --text: #333;
+            --text-light: #777;
+            --bg: #fff;
+            --bg-secondary: #f8f9fa;
+            --border: #e1e1e1;
+        }
+
+        .dark-mode {
+            --primary: #5cdb60;
+            --text: #f0f0f0;
+            --bg: #121212;
+            --bg-secondary: #1e1e1e;
+            --border: #444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Header/Nav ===== */
+        .site-header {
+            background-color: var(--bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .main-nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .main-nav a:hover:after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-actions a {
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle,
+        .mobile-menu-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        /* ===== Mobile Menu ===== */
+        .mobile-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            max-height: 400px;
+            border-top: 1px solid var(--border);
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 20px;
+        }
+
+        .mobile-nav li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .mobile-nav a:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        /* ===== Footer ===== */
+        .site-footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: var(--footer-text);
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            font-size: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .newsletter-form button {
+            padding: 0 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .legal-links a {
+            color: #aaa;
+        }
+
+        /* ===== Back to Top Button ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== Responsive Styles ===== */
+        @media (max-width: 992px) {
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .legal-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-actions {
+                gap: 15px;
+            }
+
+            .logo img {
+                height: 30px;
+            }
+        }
+
+        /* ===== Modal Styles ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: var(--bg);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .modal-body {
+            margin-top: 20px;
+            line-height: 1.7;
+        }
+
+        .modal-body h3 {
+            margin-top: 25px;
+            color: var(--primary);
+        }
+
+        .modal-body ul {
+            margin: 15px 0 15px 20px;
+        }
+
+        /* Cookie Consent Banner */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 15px;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .cookie-consent button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            margin-left: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 20px;
+            }
+
+            .cookie-consent {
+                flex-direction: column;
+            }
+
+            .cookie-consent button {
+                margin: 10px 0 0;
+                width: 100%;
+            }
+        }
+
+        /* FAQ & Shipping Modal Styles */
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .faq-question {
+            color: var(--primary);
+            cursor: pointer;
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .faq-question:after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 20px;
+        }
+
+        .faq-question.active:after {
+            content: '-';
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px 0;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .shipping-option {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .shipping-option h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Newsletter Form Styles */
+        .newsletter-form {
+            position: relative;
+        }
+
+        .form-notification {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+        }
+
+        .form-notification.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .form-notification.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .form-notification.error {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Loading state */
+        .newsletter-form.loading button {
+            pointer-events: none;
+        }
+
+        .newsletter-form.loading button i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Press Modal Specific Styles */
+        .press-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .press-contact li {
+            margin-bottom: 10px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download-button {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .download-button:hover {
+            background: var(--primary-dark);
+        }
+
+        .container1 {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 800px;
+            background:  url('https://t3.ftcdn.net/jpg/04/29/35/62/360_F_429356296_CVQ5LkC6Pl55kUNLqLisVKgTw9vjyif1.jpg') no-repeat center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .hero-badges {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .badge:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .badge i {
+            font-size: 1.2rem;
+        }
+
+        /* ===== Category Grid ===== */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .category-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px;
+            color: white;
+        }
+
+        .category-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .category-info p {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .category-card:hover .category-info p {
+            opacity: 1;
+        }
+
+        /* ===== Product Grid ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--bg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-img-container {
+            height: 350px;
+            overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .product-actions button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg-secondary);
+            color: var(--text);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .product-actions button:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        /* ===== Promo Banner ===== */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .promo-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .promo-column {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+
+        .promo-column:hover {
+            transform: translateY(-10px);
+        }
+
+        .promo-column h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .promo-column p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            font-weight: 700;
+        }
+
+        .promo-code {
+            display: inline-block;
+            padding: 10px 25px;
+            background: white;
+            color: var(--primary);
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* ===== Testimonials ===== */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: var(--bg);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .testimonial-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid var(--primary-light);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-card p:before,
+        .testimonial-card p:after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--primary-light);
+            opacity: 0.5;
+        }
+
+        .client-name {
+            font-weight: 700;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .client-location {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* ===== Blog Preview ===== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .blog-post {
+            background: var(--bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-10px);
+        }
+
+        .blog-post img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .excerpt {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .read-more:hover {
+            color: var(--primary-dark);
+        }
+
+        /* ===== Buttons ===== */
+        .cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Responsive Styles ===== */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 600px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .category-grid,
+            .product-grid,
+            .testimonial-grid,
+            .blog-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                min-height: 500px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-badges {
+                bottom: 20px;
+            }
+            
+            .badge {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header/Navigation -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="/" class="logo">
+                <h2>FitMintStore</h2>
+            </a>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop/">Shop</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop/">Shop</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Elevate Your Fitness Journey</h1>
+                <p>Premium Performance Apparel Engineered for Movement</p>
+                <a href="/shop/"><button class="cta-button">Shop Now</button></a>
+            </div>
+            <div class="hero-badges">
+                <span class="badge"><i class="fas fa-leaf"></i> Sustainable Materials</span>
+                <span class="badge"><i class="fas fa-heartbeat"></i> Performance Optimized</span>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="categories">
+            <div class="container">
+                <h2>Shop by Category</h2>
+                <div class="category-grid">
+                    <a href="/shop/" class="category-card">
+                        <img src="https://m.media-amazon.com/images/I/61GemVcZOYL._AC_UY1100_.jpg" alt="Men's Fitness Apparel">
+                        <div class="category-info">
+                            <h3>Men's Fitness</h3>
+                            <p>Explore Collection →</p>
+                        </div>
+                    </a>
+                    <a href="/shop/" class="category-card">
+                        <img src="https://m.media-amazon.com/images/I/61-UH6lPwUL._AC_UY1000_.jpg" alt="Women's Fitness Apparel">
+                        <div class="category-info">
+                            <h3>Women's Fitness</h3>
+                            <p>Explore Collection →</p>
+                        </div>
+                    </a>
+                    <a href="/shop/" class="category-card">
+                        <img src="https://vaya.in/wp-content/uploads/2020/10/11-Best-Fitness-Accessories-for-At-Home-Workouts.jpg" alt="Fitness Accessories">
+                        <div class="category-info">
+                            <h3>Accessories</h3>
+                            <p>Explore Collection →</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals -->
+        <section class="new-arrivals">
+            <div class="container1">
+                <h2>New Arrivals</h2>
+                <div class="product-grid">
+                    <!-- Product Card 1 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://incitesportswear.com/cdn/shop/files/1_0c7fe9cb-fcc0-45dd-a51a-13b1d3a362f4.jpg?v=1737194131&width=533" alt="FlexFit Pro Training Tank">
+                        </div>
+                        <div class="product-info">
+                            <h3>FlexFit Pro Training Tank</h3>
+                            <p class="price">$49.99</p>
+                            <div class="product-actions">
+                                <button class="quick-add"><i class="fas fa-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <span class="product-badge">New</span>
+                    </div>
+                    
+                    <!-- Product Card 2 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://cdn.media.amplience.net/i/frasersdev/34736303_o_a1?fmt=auto&upscale=false&w=767&h=767&sm=scaleFit&$h-ttl$" alt="Performance Leggings">
+                        </div>
+                        <div class="product-info">
+                            <h3>Performance Leggings</h3>
+                            <p class="price">$59.99</p>
+                            <div class="product-actions">
+                                <button class="quick-add"><i class="fas fa-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <span class="product-badge">Bestseller</span>
+                    </div>
+                    
+                    <!-- Product Card 3 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/526819/24/mod01/fnd/IND/fmt/png/Quarter-Zip-Women's-Training-Hoodie" alt="Training Hoodie">
+                        </div>
+                        <div class="product-info">
+                            <h3>Training Hoodie</h3>
+                            <p class="price">$64.99</p>
+                            <div class="product-actions">
+                                <button class="quick-add"><i class="fas fa-cart-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promotions Banner -->
+        <section class="promo-banner">
+            <div class="container">
+                <div class="promo-container">
+                    <div class="promo-column">
+                        <h3>Summer Sale!</h3>
+                        <p>Up to 50% Off Select Styles</p>
+                        <div id="countdown" class="countdown">7d 12h left</div>
+                        <a href="/shop/"><button class="cta-button">Shop Sale</button></a>
+                    </div>
+                    <div class="promo-column">
+                        <h3>New Customer Offer</h3>
+                        <p>Get 15% Off Your First Order</p>
+                        <code class="promo-code">MINT15</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <h2>What Our Athletes Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <img src="https://t1.bookpage.com/wp-content/uploads/2021/08/24174712/large-21269.jpg" alt="Sarah J.">
+                        <p>The best workout gear I've ever owned. Breathable and durable!</p>
+                        <span class="client-name">Sarah J.</span>
+                        <span class="client-location">Professional Yoga Instructor</span>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="Mike T.">
+                        <p>These clothes keep me cool during intense workouts. Highly recommend!</p>
+                        <span class="client-name">Mike T.</span>
+                        <span class="client-location">Personal Trainer</span>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=988&q=80" alt="Jessica L.">
+                        <p>Perfect fit and so comfortable. I own multiple pieces from FitMint!</p>
+                        <span class="client-name">Jessica L.</span>
+                        <span class="client-location">Marathon Runner</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Preview -->
+        <section class="blog-preview">
+            <div class="container">
+                <h2>Fitness Insights</h2>
+                <div class="blog-grid">
+                    <article class="blog-post">
+                        <img src="https://i.pinimg.com/originals/46/cb/41/46cb4183808569a3be7bdc344db53204.jpg" alt="Workout Tips">
+                        <div class="blog-content">
+                            <h3>Top 10 Summer Workout Tips</h3>
+                            <p class="excerpt">Stay cool and effective with our expert recommendations for summer fitness routines.</p>
+                            <a href="/blog/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-post">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nutrition Guide">
+                        <div class="blog-content">
+                            <h3>Nutrition for Peak Performance</h3>
+                            <p class="excerpt">Learn how to fuel your body for optimal results in your fitness journey.</p>
+                            <a href="/blog/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-post">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Home Workouts">
+                        <div class="blog-content">
+                            <h3>Effective Home Workout Routines</h3>
+                            <p class="excerpt">No gym? No problem! Stay fit with these effective home exercises.</p>
+                            <a href="/blog/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Countdown timer for promo
+        function updateCountdown() {
+            const targetDate = new Date('2023-12-31T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').textContent = 'Sale ended!';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById('countdown').textContent = `${days}d ${hours}h left`;
+        }
+        
+        // Update immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Product hover effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const img = card.querySelector('img');
+                img.style.transform = 'scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const img = card.querySelector('img');
+                img.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add to cart animation
+        document.querySelectorAll('.quick-add').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-cart-plus"></i>';
+                }, 1000);
+            });
+        });
+
+        // Favorite button toggle
+        document.querySelectorAll('.favorite').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                button.classList.toggle('fas');
+                button.classList.toggle('far');
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="/shop/">Men's Fitness</a></li>
+                        <li><a href="/shop/">Women's Fitness</a></li>
+                        <li><a href="/shop/">Accessories</a></li>
+                        <li><a href="/shop/">New Arrivals</a></li>
+                        <li><a href="/shop/">Sale</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#" data-policy="faq">FAQ</a></li>
+                        <li><a href="#" data-policy="shipping">Shipping</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="/about/">Our Story</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="#" data-policy="press">Press</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter-cl.vercel.app/login"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p>Subscribe for updates and exclusive offers:</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your email address" required id="newsletterEmail">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        <div class="form-notification" id="formNotification"></div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 FitMint Store. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#" data-policy="privacy">Privacy Policy</a>
+                    <a href="#" data-policy="terms">Terms of Service</a>
+                    <a href="#" data-policy="cookies">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Press Modal -->
+    <div class="modal" id="pressModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Press & Media</h2>
+            <div class="modal-body">
+                <div class="press-section">
+                    <h3>Press Inquiries</h3>
+                    <p>For media requests, interviews, or press information, please contact our communications team:</p>
+                    <ul class="press-contact">
+                        <li><strong>Email:</strong> <a href="mailto:press@fitmintstore.org">press@fitmintstore.org</a>
+                        </li>
+                        <li><strong>Phone:</strong> +44 20 3296 3254</li>
+                        <li><strong>Address:</strong><br>
+                            221B Baker Street,<br>
+                            London NW1 6XE,<br>
+                            United Kingdom</li>
+                    </ul>
+                </div>
+
+                <div class="press-section">
+                    <h3>Media Kit</h3>
+                    <p>Download our brand assets and media kit:</p>
+                    <div class="download-buttons">
+                        <a href="https://zip.co/nz/for-merchants/brand-assets/" class="download-button">
+                            <i class="fas fa-download"></i> Brand Assets (ZIP)
+                        </a>
+                        <a href="https://indiemedia.club/how-to/best-media-kit-examples/" class="download-button">
+                            <i class="fas fa-file-pdf"></i> Media Kit (PDF)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Policy Modals -->
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Privacy Policy</h2>
+            <div class="modal-body">
+                <h3>1. Information We Collect</h3>
+                <p>We collect personal information you provide when you create an account, make a purchase, or contact
+                    us. This may include:</p>
+                <ul>
+                    <li>Name and contact details</li>
+                    <li>Payment information</li>
+                    <li>Shipping and billing address</li>
+                    <li>Purchase history</li>
+                </ul>
+
+                <h3>2. How We Use Your Information</h3>
+                <p>We use your information to:</p>
+                <ul>
+                    <li>Process and fulfill your orders</li>
+                    <li>Provide customer support</li>
+                    <li>Improve our products and services</li>
+                    <li>Send marketing communications (if opted in)</li>
+                </ul>
+
+                <h3>3. Data Security</h3>
+                <p>We implement industry-standard security measures to protect your personal information.</p>
+
+                <h3>4. Your Rights</h3>
+                <p>You have the right to access, correct, or delete your personal data. Contact us at
+                    privacy@fitmintstore.org.</p>
+
+                <p><em>Last Updated: January 1, 2023</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="termsModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Terms of Service</h2>
+            <div class="modal-body">
+                <h3>1. General Terms</h3>
+                <p>By accessing FitMintStore.org, you agree to these Terms of Service.</p>
+
+                <h3>2. Products and Pricing</h3>
+                <p>We reserve the right to change product prices and availability without notice.</p>
+
+                <h3>3. Order Acceptance</h3>
+                <p>Your order is an offer to purchase which we may accept or decline.</p>
+
+                <h3>4. Returns and Refunds</h3>
+                <p>Returns must be made within 30 days of purchase. See our Return Policy for details.</p>
+
+                <h3>5. Limitation of Liability</h3>
+                <p>FitMint Store shall not be liable for any indirect, incidental damages.</p>
+
+                <p><em>Last Updated: January 1, 2023</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="cookiesModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Cookie Policy</h2>
+            <div class="modal-body">
+                <h3>1. What Are Cookies</h3>
+                <p>Cookies are small text files stored on your device when you visit websites.</p>
+
+                <h3>2. How We Use Cookies</h3>
+                <p>We use cookies to:</p>
+                <ul>
+                    <li>Remember your preferences</li>
+                    <li>Analyze site traffic</li>
+                    <li>Enable shopping cart functionality</li>
+                    <li>Improve user experience</li>
+                </ul>
+
+                <h3>3. Cookie Types</h3>
+                <ul>
+                    <li><strong>Essential:</strong> Required for site functionality</li>
+                    <li><strong>Analytics:</strong> Help us understand site usage</li>
+                    <li><strong>Marketing:</strong> Used for personalized ads</li>
+                </ul>
+
+                <h3>4. Managing Cookies</h3>
+                <p>You can control cookies through your browser settings. Note that disabling cookies may affect site
+                    functionality.</p>
+
+                <p><em>Last Updated: April 7, 2025</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Modal -->
+    <div class="modal" id="faqModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Frequently Asked Questions</h2>
+            <div class="modal-body">
+                <div class="faq-item">
+                    <h3 class="faq-question">What payment methods do you accept?</h3>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and Apple Pay.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How can I track my order?</h3>
+                    <div class="faq-answer">
+                        <p>Once your order ships, you'll receive a tracking number via email. You can track your package
+                            using the link provided.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">What is your return policy?</h3>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return policy for unworn, unwashed items with original tags. Please see our
+                            full <a href="#" data-policy="terms">Return Policy</a> for details.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Do you ship internationally?</h3>
+                    <div class="faq-answer">
+                        <p>Yes! We ship to most countries worldwide. International shipping rates and delivery times
+                            vary by destination.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How do I contact customer service?</h3>
+                    <div class="faq-answer">
+                        <p>You can reach us at support@fitmintstore.org or through our <a href="/contact">contact
+                                form</a>. We typically respond within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shipping Modal -->
+    <div class="modal" id="shippingModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Shipping Information</h2>
+            <div class="modal-body">
+                <h3>Shipping Options</h3>
+                <div class="shipping-option">
+                    <h4>Standard Shipping</h4>
+                    <ul>
+                        <li>3-5 business days</li>
+                        <li>$4.99 or free on orders over $50</li>
+                        <li>Tracking included</li>
+                    </ul>
+                </div>
+
+                <div class="shipping-option">
+                    <h4>Express Shipping</h4>
+                    <ul>
+                        <li>1-2 business days</li>
+                        <li>$9.99</li>
+                        <li>Priority processing</li>
+                    </ul>
+                </div>
+
+                <h3>Order Processing</h3>
+                <p>Orders placed before 2pm EST are processed the same business day. Weekends and holidays may add 1-2
+                    days to processing time.</p>
+
+                <h3>International Shipping</h3>
+                <p>International orders typically take 7-14 business days to arrive, depending on destination. Customers
+                    are responsible for any customs fees.</p>
+
+                <h3>Shipping Restrictions</h3>
+                <p>Some items may have shipping restrictions due to size or content. These will be noted on the product
+                    page.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobileNav');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            mobileMenuToggle.innerHTML = mobileNav.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Theme Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Policy Modals
+        const policyLinks = document.querySelectorAll('[data-policy]');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+
+        policyLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const policy = link.getAttribute('data-policy');
+                document.getElementById(`${policy}Modal`).style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Cookie Consent Banner
+        const cookieConsent = document.createElement('div');
+        cookieConsent.className = 'cookie-consent';
+        cookieConsent.innerHTML = `
+  <p>We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of cookies.</p>
+  <button id="acceptCookies">Accept</button>
+  <button id="learnMoreCookies">Learn More</button>
+`;
+
+        if (!localStorage.getItem('cookiesAccepted')) {
+            document.body.appendChild(cookieConsent);
+            cookieConsent.style.display = 'block';
+        }
+
+        document.getElementById('acceptCookies')?.addEventListener('click', () => {
+            localStorage.setItem('cookiesAccepted', 'true');
+            cookieConsent.style.display = 'none';
+        });
+
+        document.getElementById('learnMoreCookies')?.addEventListener('click', () => {
+            document.getElementById('cookiesModal').style.display = 'block';
+            cookieConsent.style.display = 'none';
+            document.body.style.overflow = 'hidden';
+        });
+        // Add these to your existing policyLinks array
+        const additionalLinks = document.querySelectorAll('[href="/faq"], [href="/shipping"]');
+        additionalLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('href').replace('/', '');
+                document.getElementById(`${page}Modal`).style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // FAQ Accordion Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                question.classList.toggle('active');
+                const answer = question.nextElementSibling;
+                answer.classList.toggle('show');
+            });
+        });
+
+        // Newsletter Form Submission
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterEmail = document.getElementById('newsletterEmail');
+        const formNotification = document.getElementById('formNotification');
+
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Show loading state
+                newsletterForm.classList.add('loading');
+
+                // Simulate API call (replace with actual fetch to your backend)
+                try {
+                    // Here you would typically make a fetch/ajax call to your server
+                    // await fetch('/api/newsletter', { method: 'POST', body: JSON.stringify({ email: newsletterEmail.value }) });
+
+                    // Simulate network delay
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+
+                    // Clear form
+                    newsletterEmail.value = '';
+
+                    // Show success message
+                    showNotification('Thank you for subscribing!', 'success');
+
+                    // You might want to store in localStorage that they subscribed
+                    localStorage.setItem('newsletterSubscribed', 'true');
+                } catch (error) {
+                    showNotification('Subscription failed. Please try again.', 'error');
+                    console.error('Newsletter error:', error);
+                } finally {
+                    newsletterForm.classList.remove('loading');
+
+                    // Hide notification after 5 seconds
+                    setTimeout(() => {
+                        formNotification.classList.remove('show');
+                    }, 5000);
+                }
+            });
+        }
+
+        function showNotification(message, type) {
+            formNotification.textContent = message;
+            formNotification.className = 'form-notification show ' + type;
+        }
+        // Add to policyLinks initialization
+        document.querySelectorAll('[href="/press"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('pressModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        // Product hover effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseover', () => {
+                card.querySelector('img').style.transform = 'scale(1.05)';
+            });
+
+            card.addEventListener('mouseout', () => {
+                card.querySelector('img').style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+
+</html>
